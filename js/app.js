@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -8,6 +8,7 @@ var Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -17,7 +18,7 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    this.x += 200 * dt;
+    this.x += this.speed * dt;
     if(this.x >= 800){
  		this.x = -200;
     }
@@ -40,19 +41,19 @@ var Player = function(x, y) {
     this.sprite = 'images/char-horn-girl.png';
     this.x = x;
     this.y = y;
+    this.startX = 200;
+    this.startY = 300;
+    this.collisionThreshold = 50;
 };
 
 Player.prototype.update = function () {
-    //console.log('inside update');
 
-    let collisionThreshold = 50;
-
-    // check collison
+    // check collision
     for(const enemy of allEnemies){
-    	if (Math.abs(enemy.x - this.x) <= collisionThreshold && Math.abs(enemy.y - this.y) <= collisionThreshold){
-    		console.log('collisonnnnnnnnnnnnnnn', Math.abs(enemy.x - this.x), Math.abs(enemy.y - this.y));
-    		this.x = 200; 
-    		this.y = 300;
+    	if (Math.abs(enemy.x - this.x) <= this.collisionThreshold && Math.abs(enemy.y - this.y) <= this.collisionThreshold){
+    		console.log('Collision!!', Math.abs(enemy.x - this.x), Math.abs(enemy.y - this.y));
+    		this.x = this.startX; 
+    		this.y = this.startY;
     	}
     }
 };
@@ -108,18 +109,15 @@ Player.prototype.handleInput = function (event) {
 let allEnemies = []
 let player = new Player(200, 300);
 
-allEnemies.push(new Enemy(15,65));
-allEnemies.push(new Enemy(130,65));
-allEnemies.push(new Enemy(250,65));
-allEnemies.push(new Enemy(370,65));
-allEnemies.push(new Enemy(15,150));
-allEnemies.push(new Enemy(130,150));
-allEnemies.push(new Enemy(250,150));
-allEnemies.push(new Enemy(370,150));
-allEnemies.push(new Enemy(15,232));
-allEnemies.push(new Enemy(130,232));
-allEnemies.push(new Enemy(250,232));
-allEnemies.push(new Enemy(370,232));
+allEnemies.push(new Enemy(15,65,200));
+allEnemies.push(new Enemy(130,65,300));
+allEnemies.push(new Enemy(250,65,600));
+allEnemies.push(new Enemy(15,150,300));
+allEnemies.push(new Enemy(130,150,200));
+allEnemies.push(new Enemy(250,150,500));
+allEnemies.push(new Enemy(15,232,400));
+allEnemies.push(new Enemy(130,232,200));
+allEnemies.push(new Enemy(370,232,50));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
