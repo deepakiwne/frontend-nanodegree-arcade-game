@@ -48,12 +48,21 @@ var Player = function(x, y) {
 
 Player.prototype.update = function () {
 
-    // check collision
+    // check collision with bug
     for(const enemy of allEnemies){
     	if (Math.abs(enemy.x - this.x) <= this.collisionThreshold && Math.abs(enemy.y - this.y) <= this.collisionThreshold){
     		console.log('Collision!!', Math.abs(enemy.x - this.x), Math.abs(enemy.y - this.y));
     		this.x = this.startX; 
     		this.y = this.startY;
+    	}
+    }
+
+    // gem collection
+    for(const stone of allStones){
+    	if (Math.abs(stone.x - this.x) <= this.collisionThreshold && Math.abs(stone.y - this.y) <= this.collisionThreshold){
+    		console.log('Collision!!', Math.abs(stone.x - this.x), Math.abs(stone.y - this.y));
+    		stone.x = 1000; 
+    		stone.y = 1000;
     	}
     }
 };
@@ -102,22 +111,38 @@ Player.prototype.handleInput = function (event) {
     }
 };
 
+var Stone = function(x, y) {
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
+    this.sprite = 'images/Star.png';
+    this.x = x;
+    this.y = y;
+};
+
+Stone.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-let allEnemies = []
 let player = new Player(200, 300);
+let allEnemies = []
 
 allEnemies.push(new Enemy(15,65,200));
-allEnemies.push(new Enemy(130,65,300));
-allEnemies.push(new Enemy(250,65,600));
+allEnemies.push(new Enemy(130,65,350));
 allEnemies.push(new Enemy(15,150,300));
 allEnemies.push(new Enemy(130,150,200));
-allEnemies.push(new Enemy(250,150,500));
 allEnemies.push(new Enemy(15,232,400));
-allEnemies.push(new Enemy(130,232,200));
-allEnemies.push(new Enemy(370,232,50));
+allEnemies.push(new Enemy(130,232,250));
+
+let allStones = []
+
+allStones.push(new Stone(110,65));
+allStones.push(new Stone(210,150));
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
