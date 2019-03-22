@@ -46,6 +46,10 @@ var Player = function(x, y) {
     this.collisionThreshold = 50;
 };
 
+Player.prototype.setCharacter = function (character) {
+    this.sprite = character;
+};
+
 Player.prototype.reset = function () {
     this.x = this.startX; 
     this.y = this.startY;
@@ -64,11 +68,11 @@ Player.prototype.update = function () {
     }
 
     // gem collection
-    for(const stone of allStones){
-    	if (Math.abs(stone.x - this.x) <= this.collisionThreshold && Math.abs(stone.y - this.y) <= this.collisionThreshold){
-    		console.log('Collision!!', Math.abs(stone.x - this.x), Math.abs(stone.y - this.y));
-    		stone.x = 1000; 
-    		stone.y = 1000;
+    for(const star of allStars){
+    	if (Math.abs(star.x - this.x) <= this.collisionThreshold && Math.abs(star.y - this.y) <= this.collisionThreshold){
+    		console.log('Collision!!', Math.abs(star.x - this.x), Math.abs(star.y - this.y));
+    		star.x = 1000; 
+    		star.y = 1000;
     	}
     }
 };
@@ -226,6 +230,9 @@ GameScore.prototype.reset = function () {
     
     // reset player
     player.reset();
+
+    allStars[0].setPosition(110,65);
+    allStars[1].setPosition(210,150);
 }
 
 function playAgain(){
@@ -233,7 +240,22 @@ function playAgain(){
     gameScore.reset();
 }
 
-var Stone = function(x, y) {
+function selectPlayer(name){
+    console.log(name);
+    if (name === 'pink'){
+        player.setCharacter('images/char-pink-girl.png'); 
+    } else if (name === 'cat'){
+        player.setCharacter('images/char-cat-girl.png'); 
+    } else if(name === 'princess'){
+        player.setCharacter('images/char-princess-girl.png'); 
+    } else if(name === 'boy'){
+        player.setCharacter('images/char-boy.png'); 
+    } else if(name === 'horn'){
+        player.setCharacter('images/char-horn-girl.png'); 
+    }   
+}
+
+var Star = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -244,8 +266,13 @@ var Stone = function(x, y) {
     this.y = y;
 };
 
-Stone.prototype.render = function () {
+Star.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Star.prototype.setPosition = function (x, y) {
+    this.x = x;
+    this.y = y;
 };
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -261,9 +288,9 @@ allEnemies.push(new Enemy(130,150,200));
 allEnemies.push(new Enemy(15,232,400));
 allEnemies.push(new Enemy(130,232,250));
 
-let allStones = []
-allStones.push(new Stone(110,65));
-allStones.push(new Stone(210,150));
+let allStars = []
+allStars.push(new Star(110,65));
+allStars.push(new Star(210,150));
 
 let interval = undefined;
 let gameScore = new GameScore();
