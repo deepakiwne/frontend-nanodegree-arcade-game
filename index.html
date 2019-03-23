@@ -1,101 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Arcade Game</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>Arcade Game</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet prefetch">
 	<link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet prefetch">
-    <link rel="stylesheet" href="css/style.css">
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+	<!-- Container start -->
 	<div class="container">
 		<header>
 			<h1>Arcade Game</h1>
 		</header>
-		<section class="score-panel">
+		<main class="score-panel">
 			<ul class="stars">
 				<li><i class="fa fa-star"></i></li>
 				<li><i class="fa fa-star"></i></li>
 				<li><i class="fa fa-star"></i></li>
 			</ul><span class="moves">0</span> Moves <span class="timer">0:00</span>
 			<div class="restart">
-				<i class="fa fa-repeat" onclick="playAgain();" ></i>
-			</div>
-
+				<i class="fa fa-repeat" onclick="playAgain();"></i>
+			</div><!-- Dropdown start -->
 			<div class="dropdown">
-  				<button class="btn btn-lg btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    			Player Selection
-  				</button>
-  				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    				<a class="dropdown-item" onclick="selectPlayer('horn');">
-    					<div class="media">
-  							<img class="mr-3" src="images/char-horn-girl-icon.png" alt="Generic placeholder image" width="80" height="80">
-  							<div class="media-body">
-    							<h5 class="mt-3">Horn Girl</h5>
-  							</div>
+				<button aria-expanded="false" aria-haspopup="true" class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton" type="button">Player Selection</button>
+				<div aria-labelledby="dropdownMenuButton" class="dropdown-menu">
+					<a class="dropdown-item" onclick="selectPlayer('horn');">
+					<div class="media">
+						<img alt="horn girl icon" class="mr-3" height="80" src="images/char-horn-girl-icon.png" width="80">
+						<div class="media-body">
+							<h5 class="mt-3">Horn Girl</h5>
 						</div>
-    				</a>
-    				<a class="dropdown-item" onclick="selectPlayer('pink');">
-    					<div class="media">
-  							<img class="mr-3" src="images/char-pink-girl-icon.png" alt="Generic placeholder image" width="80" height="80">
-  							<div class="media-body">
-    							<h5 class="mt-3">Pink Girl</h5>
-  							</div>
+					</div></a> <a class="dropdown-item" onclick="selectPlayer('pink');">
+					<div class="media">
+						<img alt="pink girl icon" class="mr-3" height="80" src="images/char-pink-girl-icon.png" width="80">
+						<div class="media-body">
+							<h5 class="mt-3">Pink Girl</h5>
 						</div>
-    				</a>
-    				<a class="dropdown-item" onclick="selectPlayer('cat');">
-    					<div class="media">
-  							<img class="mr-3" src="images/char-cat-girl-icon.png" alt="Generic placeholder image" width="80" height="80">
-  							<div class="media-body">
-    							<h5 class="mt-3">Cat Girl</h5>
-  							</div>
+					</div></a> <a class="dropdown-item" onclick="selectPlayer('cat');">
+					<div class="media">
+						<img alt="cat girl icon" class="mr-3" height="80" src="images/char-cat-girl-icon.png" width="80">
+						<div class="media-body">
+							<h5 class="mt-3">Cat Girl</h5>
 						</div>
-    				</a>
-    				<a class="dropdown-item" onclick="selectPlayer('princess');">
-    					<div class="media">
-  							<img class="mr-3" src="images/char-princess-girl-icon.png" alt="Generic placeholder image" width="80" height="80">
-  							<div class="media-body">
-    							<h5 class="mt-3">Princess Girl</h5>
-  							</div>
+					</div></a> <a class="dropdown-item" onclick="selectPlayer('princess');">
+					<div class="media">
+						<img alt="princess girl icon" class="mr-3" height="80" src="images/char-princess-girl-icon.png" width="80">
+						<div class="media-body">
+							<h5 class="mt-3">Princess Girl</h5>
 						</div>
-    				</a>
-    				<a class="dropdown-item" onclick="selectPlayer('boy');">
-    					<div class="media">
-  							<img class="mr-3" src="images/char-boy-icon.png" alt="Generic placeholder image" width="80" height="80">
-  							<div class="media-body">
-    							<h5 class="mt-3">Boy</h5>
-  							</div>
+					</div></a> <a class="dropdown-item" onclick="selectPlayer('boy');">
+					<div class="media">
+						<img alt="boy icon" class="mr-3" height="80" src="images/char-boy-icon.png" width="80">
+						<div class="media-body">
+							<h5 class="mt-3">Boy</h5>
 						</div>
-    				</a>
-  				</div>
-			</div>
-		</section>
-		
-		<div class="modal" id="myModal" role="dialog" tabindex="-1">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-body">
-						<img class="rounded mx-auto d-block" src="images/tick-inside-a-circle.svg" alt="tick inside a circke image" width="50px" height="50px">
-						<h3 class="heading">Congratulations! You Won!</h3>
-						<div class="message">
-							In <span class="final-time"></span> minutes, with <span class="final-moves"></span> moves and <span class="final-stars"></span> star
+					</div></a>
+				</div>
+			</div><!-- Dropdown end -->
+			<!-- Start modal when the game ends -->
+			<div class="modal" id="myModal" role="dialog" tabindex="-1">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-body">
+							<img alt="tick inside a circke image" class="rounded mx-auto d-block" height="50" src="images/tick-inside-a-circle.svg" width="50">
+							<h3 class="heading">Congratulations! You Won!</h3>
+							<div class="message">
+								In <span class="final-time"></span> minutes, with <span class="final-moves"></span> moves and <span class="final-stars"></span> star
+							</div>
+							<div class="message1">
+								Woooooooo!
+							</div>
 						</div>
-						<div class="message1">
-							Woooooooo!
+						<div class="modal-footer">
+							<button class="btn btn-primary play-again" onclick="playAgain();" type="button">Play again!</button>
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary play-again" onclick="playAgain();" type="button">Play again!</button>
 					</div>
 				</div>
-			</div>
-		</div><!-- end modal -->
+			</div><!-- End modal -->
+		</main>
+	</div><!-- Container End -->
+	<!-- Javascript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+	<script src="js/resources.js"></script> 
+	<script src="js/app.js"></script> 
+	<script src="js/engine.js"></script> <!-- Javascript End -->
 </body>
 </html>
