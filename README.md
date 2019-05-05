@@ -13,7 +13,7 @@ In this game you have a Player and Enemies (bugs). The goal of the player is to 
 The Score-Panel displays star rating, moves and time taken. Try reaching the water with at most 7 moves to get 3 stars! :)
 
 ## Technology Used
-The game is developed using HTML, CSS, JavaScript. The game uses `bootstrap` and its responsive design is fit for all modern desktop, tablet, and phone browsers.
+The game is developed using HTML, CSS, JavaScript. The game uses `bootstrap`, `font-awesome` and its responsive design is fit for all modern desktop, tablet, and phone browsers.
 
 Have Fun!
 
